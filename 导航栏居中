@@ -1,0 +1,157 @@
+#CSS导航菜单水平居中的多种方法
+##方法1：display:inline-block
+
+这个方法比较简单，是将容器转成「display:inline-block」行内块级元素，然后就可以直接用「text-align:center」使其达到水平居中效果。
+
+HTML代码：
+
+这里我们需要一个div来包围这个导航菜单。
+
+<div class="navbar">
+    <ul>
+        <li><a href="/">首页</a></li>
+        …
+    </ul>
+</div>
+CSS代码：
+
+给外面的div添加「text-align:center」，然后将菜单容器设成「display:inline-block」行内块级元素，菜单浮左「float:left」
+
+.navbar {
+    text-align:center;
+}
+.navbar ul {
+    display:inline-block;
+}
+.navbar li {
+    float:left;
+}
+.navbar li + li {
+    margin-left:20px;
+}
+这里浏览器兼容只能是IE8或更高版本，所以如果要兼容IE7的话，请加入以下代码
+
+.navbar ul {
+    display:inline;
+    zoom:1;
+}
+##方法2：position:relative
+
+这是使用「position:relative」定位方法来让元素水平居中，我不是很推荐这方法，因为代码多了个div去包住，当然这些是根据情况来使用的。
+
+HTML代码：
+
+<div class="navbar">
+    <div>
+        <ul>
+            <li><a href="/">首页</a></li>
+            …
+        </ul>
+    </div>
+</div>
+CSS代码：
+将定位div设为浮动，再定位「left:50%」,然后导航定位至「left:-50%」，这方法很有意思吧。可能表达不是很清楚，自己看代码吧^^
+
+.navbar {
+    overflow:hidden;
+}
+.navbar > div {
+    position:relative;
+    left:50%;
+    float:left;
+}
+.navbar ul {
+    position:relative;
+    left:-50%;
+    float:left;
+}
+.navbar li {
+    float:left;
+}
+.navbar li + li {
+    margin-left:20px;
+}
+如果要兼容IE7，请添加以下样式：
+
+.navbar {
+    position:relative;
+}
+##方法3：display:table
+
+如果你喜欢简洁的代码，哪么这个方法就非常适合你了。
+
+HTML代码：
+
+<ul class="navbar">
+    <li><a href="/">Home</a></li>
+    …
+</ul>
+CSS代码：
+
+.navbar {
+    display:table;
+    margin:0 auto;
+}
+.navbar li {
+    display:table-cell;
+}
+.navbar li + li {
+    padding-left:20px;
+}
+浏览器兼容：这方法代码精简，但不支持IE7及以下版本……
+
+##方法4：display:inline-flex
+
+有关flex layout的知识自己查下吧>_<
+
+HTML代码：
+
+<div class="navbar">
+    <ul>
+        <li><a href="/">Home</a></li>
+        …
+    </ul>
+</div>
+CSS代码：
+
+.navbar {
+    text-align:center;
+}
+.navbar > ul {
+    display:-webkit-inline-box;
+    display:-moz-inline-box;
+    display:-ms-inline-flexbox;
+    display:-webkit-inline-flex;
+    display:inline-flex;
+}
+.navbar li + li {
+    margin-left:20px;
+}
+浏览器兼容：不支持IE7及以下版本的IE浏览器。
+
+##方法5：width:fit-content
+
+HTML代码：
+
+<div class="navbar">
+    <ul>
+        <li><a href="/">首页</a></li>
+        …
+    </ul>
+</div>
+CSS代码：
+
+.navbar {
+    text-align:center;
+}
+.navbar > ul {
+    display:-webkit-inline-box;
+    display:-moz-inline-box;
+    display:-ms-inline-flexbox;
+    display:-webkit-inline-flex;
+    display:inline-flex;
+}
+.navbar li + li {
+    margin-left:20px;
+}
+浏览器兼容：这个兼容比较低，只支持Firefox或chrome、Opera 12这些较新的浏览器。
